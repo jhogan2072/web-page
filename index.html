@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercises</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a2332; --bg2: #1f2d40; --surface: #243245; --surface2: #2a3a52;
+    --ink: #e8e0d4; --ink-muted: #8a9bb0;
+    --accent: #7eb8a0; --accent-dark: #4a8a72; --accent-light: rgba(126,184,160,0.12);
+    --warm: #d4a96a; --warm-light: rgba(212,169,106,0.12);
+    --red: #d47a6a; --red-light: rgba(212,122,106,0.12);
+    --blue: #7aaed4; --blue-light: rgba(122,174,212,0.12);
+    --border: rgba(255,255,255,0.08); --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; padding-bottom: 60px; font-size: 20px; }
+
+  header { background: linear-gradient(135deg, #0f1a26 0%, #1a3045 100%); padding: 52px 32px 44px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .header-orb { position: absolute; border-radius: 50%; pointer-events: none; }
+  .orb1 { width: 300px; height: 300px; right: -80px; top: -80px; background: radial-gradient(circle, rgba(126,184,160,0.12) 0%, transparent 70%); }
+  .orb2 { width: 180px; height: 180px; right: 60px; bottom: -40px; background: radial-gradient(circle, rgba(212,169,106,0.08) 0%, transparent 70%); }
+  .header-tag { font-size: 17px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  header h1 { font-family: 'Lora', serif; font-size: clamp(26px, 4vw, 38px); line-height: 1.2; color: var(--ink); max-width: 520px; }
+  header h1 em { font-style: italic; color: var(--warm); }
+  header p { margin-top: 14px; font-size: 26px; color: var(--ink-muted); max-width: 500px; line-height: 1.65; font-weight: 300; }
+  .header-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .pill { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--ink-muted); font-size: 26px; font-weight: 500; padding: 5px 14px; border-radius: 100px; }
+  .pill.green { background: var(--accent-light); border-color: rgba(126,184,160,0.3); color: var(--accent); }
+  .pill.warm { background: var(--warm-light); border-color: rgba(212,169,106,0.3); color: var(--warm); }
+
+  /* Progress banner */
+  .progress-banner { margin: 24px 20px 0; background: var(--accent-light); border: 1px solid rgba(126,184,160,0.25); border-radius: var(--radius); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .progress-banner-icon { font-size: 24px; flex-shrink: 0; }
+  .progress-banner h3 { font-size: 17px; font-weight: 600; color: var(--accent); margin-bottom: 5px; }
+  .progress-banner p { font-size: 20px; color: var(--ink-muted); line-height: 1.6; }
+
+  .notice { margin: 12px 20px 0; background: var(--red-light); border: 1px solid rgba(212,122,106,0.25); border-radius: var(--radius); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .notice-icon { font-size: 26px; flex-shrink: 0; margin-top: 1px; }
+  .notice h3 { font-size: 17px; font-weight: 600; color: var(--red); margin-bottom: 5px; }
+  .notice p { font-size: 20px; color: var(--ink-muted); line-height: 1.6; }
+
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 20px 28px; }
+  @media (max-width: 520px) { .rules-grid { grid-template-columns: 1fr; } }
+  .rule-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .rule-icon { font-size: 20px; margin-bottom: 8px; }
+  .rule-title { font-size: 26px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+  .rule-text { font-size: 20px; color: var(--ink-muted); line-height: 1.55; }
+
+  .section-title { font-family: 'Lora', serif; font-size: 26px; color: var(--ink); padding: 0 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .tab-nav { display: flex; gap: 6px; padding: 0 20px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab-btn { padding: 9px 20px; border-radius: 100px; border: 1.5px solid var(--border); background: transparent; font-family: 'Source Sans 3', sans-serif; font-size: 17px; font-weight: 500; cursor: pointer; color: var(--ink-muted); transition: all 0.2s; }
+  .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tab-btn.active { background: var(--accent); color: #0f1a26; border-color: var(--accent); font-weight: 600; }
+
+  .tab-panel { display: none; padding: 0 20px; }
+  .tab-panel.active { display: block; }
+
+  .panel-intro { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 20px; }
+  .panel-intro h3 { font-family: 'Lora', serif; font-size: 26px; color: var(--warm); margin-bottom: 8px; }
+  .panel-intro p { font-size: 17px; color: var(--ink-muted); line-height: 1.65; }
+  .panel-intro .time-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--warm-light); border: 1px solid rgba(212,169,106,0.25); color: var(--warm); font-size: 26px; font-weight: 600; padding: 4px 12px; border-radius: 100px; margin-top: 10px; }
+
+  /* Current baseline box */
+  .baseline-box { background: var(--blue-light); border: 1px solid rgba(122,174,212,0.25); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; font-size: 20px; color: var(--blue); line-height: 1.6; }
+  .baseline-box strong { color: var(--blue); }
+
+  .ex-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; cursor: pointer; }
+  .ex-card:hover { border-color: rgba(126,184,160,0.3); }
+  .ex-card.open { border-color: rgba(126,184,160,0.4); }
+  .ex-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
+  .ex-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; background: var(--surface2); }
+  .ex-info { flex: 1; }
+  .ex-name { font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .ex-prescription { font-size: 20px; color: var(--ink-muted); margin-top: 3px; }
+  .ex-prescription strong { color: var(--accent); font-weight: 600; }
+  .ex-tags { display: flex; gap: 4px; margin-top: 5px; flex-wrap: wrap; }
+  .ex-tag { font-size: 20px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+  .tag-gym { background: rgba(122,174,212,0.15); color: var(--blue); }
+  .tag-home { background: rgba(126,184,160,0.15); color: var(--accent); }
+  .tag-standing { background: rgba(212,169,106,0.15); color: var(--warm); }
+  .tag-seated { background: rgba(126,184,160,0.15); color: var(--accent); }
+  .tag-hands { background: rgba(180,130,200,0.15); color: #c8a0d8; }
+  .tag-balance { background: rgba(212,122,106,0.15); color: var(--red); }
+  .ex-chevron { color: var(--ink-muted); font-size: 20px; transition: transform 0.25s; flex-shrink: 0; }
+  .ex-card.open .ex-chevron { transform: rotate(180deg); }
+  .ex-body { display: none; border-top: 1px solid var(--border); padding: 18px; }
+  .ex-card.open .ex-body { display: block; }
+  .ex-body h4 { font-size: 17px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 14px 0 8px; }
+  .ex-body h4:first-child { margin-top: 0; }
+  .ex-body ol, .ex-body ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .ex-body li { font-size: 17px; color: var(--ink); line-height: 1.6; }
+  .ex-body li strong { color: var(--warm); }
+
+  .tip-box { background: var(--warm-light); border-left: 3px solid var(--warm); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 12px; font-size: 20px; color: #c8a060; line-height: 1.6; }
+  .safety-box { background: var(--red-light); border-left: 3px solid var(--red); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 8px; font-size: 20px; color: #c87060; line-height: 1.6; }
+  .progress-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 8px; font-size: 20px; color: #5a9a82; line-height: 1.6; }
+
+  .video-btn { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 20px; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid rgba(126,184,160,0.4); padding: 6px 14px; border-radius: 7px; transition: background 0.15s; font-family: 'Source Sans 3', sans-serif; }
+  .video-btn:hover { background: var(--accent-light); }
+
+  /* Schedule */
+  .schedule { margin: 0 20px 28px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .schedule h3 { font-family: 'Lora', serif; font-size: 26px; margin-bottom: 6px; color: var(--ink); }
+  .schedule-sub { font-size: 20px; color: var(--ink-muted); margin-bottom: 16px; line-height: 1.5; }
+  .week-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 6px; }
+  .day-cell { border-radius: 8px; padding: 10px 4px; text-align: center; }
+  .day-cell .day-name { font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 5px; font-size: 20px; }
+  .day-cell .day-type { font-weight: 600; font-size: 17px; line-height: 1.3; }
+  .cell-strength { background: var(--accent-light); border: 1px solid rgba(126,184,160,0.25); }
+  .cell-strength .day-type { color: var(--accent); }
+  .cell-cardio { background: var(--blue-light); border: 1px solid rgba(122,174,212,0.25); }
+  .cell-cardio .day-type { color: var(--blue); }
+  .cell-combo { background: var(--warm-light); border: 1px solid rgba(212,169,106,0.25); }
+  .cell-combo .day-type { color: var(--warm); }
+  .cell-rest { background: rgba(255,255,255,0.03); border: 1px dashed var(--border); }
+  .cell-rest .day-type { color: #444e5e; }
+  .schedule-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 26px; color: var(--ink-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+  .schedule-note { font-size: 20px; color: var(--ink-muted); margin-top: 12px; line-height: 1.6; border-top: 1px solid var(--border); padding-top: 12px; }
+
+  /* Cardio guidance */
+  .cardio-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 10px; }
+  .cardio-card h4 { font-size: 26px; font-weight: 600; color: var(--blue); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .cardio-card p { font-size: 17px; color: var(--ink-muted); line-height: 1.65; margin-bottom: 8px; }
+  .cardio-card ul { padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+  .cardio-card li { font-size: 17px; color: var(--ink-muted); line-height: 1.55; }
+  .cardio-card li strong { color: var(--ink); }
+
+  .progress-section { margin: 0 20px 28px; }
+  .prog-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 8px; }
+  .prog-card h4 { font-size: 20px; font-weight: 600; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .prog-card ul { padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+  .prog-card li { font-size: 17px; color: var(--ink-muted); line-height: 1.5; }
+
+  footer { margin: 20px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 20px; color: var(--ink-muted); line-height: 1.7; background: var(--surface); }
+  footer strong { color: var(--red); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-orb orb1"></div>
+  <div class="header-orb orb2"></div>
+  <div class="header-tag">Strength and Balance Exercises</div>
+</header>
+
+<div style="max-width:800px;margin:0 auto;">
+
+  <!-- Tabs -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('cardio', this)">🚴 Cardio</button>
+    <button class="tab-btn" onclick="showTab('legs', this)">🦵 Legs & Stairs</button>
+    <button class="tab-btn" onclick="showTab('balance', this)">⚖️ Balance</button>
+    <button class="tab-btn" onclick="showTab('shoulders', this)">💪 Shoulders</button>
+    <button class="tab-btn" onclick="showTab('hands', this)">🤲 Hands</button>
+  </div>
+
+  <!-- CARDIO TAB -->
+  <div class="tab-panel active" id="tab-cardio">
+    <div class="panel-intro">
+      <h3>Cardio — Bike, Hand Bike, Walking</h3>
+      <p>Already doing bike and hand bike — which can be an anchor of every session. The goal now is to add a little structure so it continues to provide a training stimulus rather than becoming a comfortable routine that plateaus. Cardio at this level also directly supports walking endurance and stair climbing.</p>
+      <div class="time-badge">⏱ 20–25 minutes total cardio per session</div>
+    </div>
+
+    <div class="cardio-card">
+      <h4>🚴 Stationary Bike — Add Gentle Progression</h4>
+      <p>The bike is ideal: no fall risk, joint-friendly, trains the exact muscles needed for walking and stairs (quads, glutes, calves).</p>
+      <ul>
+        <li><strong>Current:</strong> Whatever duration and resistance using now — use that as the baseline.</li>
+        <li><strong>Target over 4–6 weeks:</strong> Build toward 15 minutes continuous at a resistance level that makes conversation slightly effortful but still possible. This is the "talk test" — a simple and effective intensity guide.</li>
+        <li><strong>How to progress:</strong> Add 1–2 minutes per week, or nudge resistance up one level every 2 weeks — not both at once.</li>
+        <li><strong>Watch for:</strong> Leaning heavily on the handlebars. Encourage upright posture — it engages the core and trains better walking posture.</li>
+      </ul>
+    </div>
+
+    <div class="cardio-card">
+      <h4>🔄 Hand Bike (Upper Body Ergometer) — Structure It</h4>
+      <p>The hand bike is doing double duty: it trains cardiovascular fitness AND rebuilds shoulder and arm endurance simultaneously. It's an underrated tool for his situation.</p>
+      <ul>
+        <li><strong>Current:</strong> Use existing duration as baseline.</li>
+        <li><strong>Target:</strong> 10 minutes at a comfortable but non-trivial resistance. Should feel like mild effort in the shoulders and arms.</li>
+        <li><strong>Tip:</strong> Try alternating direction (forward pedaling vs. backward) partway through the session — backward engages the posterior shoulder and triceps more, which complements the strength exercises.</li>
+        <li><strong>Progress:</strong> Same as bike — time or resistance, never both at once.</li>
+      </ul>
+    </div>
+
+    <div class="cardio-card">
+      <h4>🚶 Walking — Keep It as Active Recovery</h4>
+      <p>Walking to the gym is already meaningful exercise. The walk itself counts. On rest days, a 10–15 minute walk around the neighborhood — even slow — maintains the gait pattern and adds to weekly activity volume.</p>
+      <ul>
+        <li><strong>Focus on quality:</strong> heel-strike first, eyes forward, arms swinging gently. Discourage shuffling.</li>
+        <li><strong>Goal over 8 weeks:</strong> Extend walk duration by 2–3 minutes every couple of weeks. No rush.</li>
+        <li><strong>Stairs on the walk:</strong> If there are curbs or a few steps along the route, using them deliberately is good practice — more below in the Legs tab.</li>
+      </ul>
+      <div class="tip-box">💡 The gym walk + bike + hand bike is already a solid cardiovascular session. The strength work below is what will address the remaining weak points most efficiently — don't feel pressure to do more cardio than he's comfortable with.</div>
+    </div>
+  </div>
+
+  <!-- LEGS TAB -->
+  <div class="tab-panel" id="tab-legs">
+    <div class="panel-intro">
+      <h3>Legs, Stairs & Lower Body Strength</h3>
+      <p>Step-ups are direct training for leg strength. Sit-to-stand is perhaps the most important functional exercise, so that becomes a progression exercise now — harder versions, not just repeating the same thing.</p>
+      <div class="time-badge">⏱ 10–12 minutes · Do all exercises after cardio</div>
+    </div>
+
+    <!-- Sit to Stand - Progressed -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🪑</div>
+        <div class="ex-info">
+          <div class="ex-name">Sit-to-Stand — Arms-Free Progression</div>
+          <div class="ex-prescription"><strong>8–10 reps × 3 sets</strong> · No armrest use · 90 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-home">Home or Gym</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Sit at the front edge of a firm chair, feet flat and shoulder-width apart.</li>
+          <li>Cross arms over chest — no pushing off the armrests or thighs.</li>
+          <li>Arms straight out for balance is fine as well and may be better if arms over chest feels uncomfortable/difficult/imbalanced.</li>
+          <li>Lean forward (nose over toes) and rise to standing using leg strength only.</li>
+          <li>Lower back down slowly and with control — the slow lowering is where most strength gain happens. Aim for 3 seconds down.</li>
+          <li>If arms-free is too hard yet, place hands lightly on thighs (not pushing — just touching for balance confidence) and work toward full arms-crossed over sessions.</li>
+        </ol>
+        <div class="progress-box">✅ Progression milestone: When 10 reps arms-crossed feels easy across 3 sets, try a lower surface (a slightly lower chair or firm cushion added then removed). Lower = harder.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=sit+to+stand+no+hands+progression+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Step-Ups -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🪜</div>
+        <div class="ex-info">
+          <div class="ex-name">Step-Ups (Stair Training)</div>
+          <div class="ex-prescription"><strong>8 reps per leg × 2 sets</strong> · Bottom stair or low step · 90 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-home">Home</span><span class="ex-tag tag-gym">Gym</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Stand in front of the bottom stair (or a low, stable step — 6–8 inches). Hold the railing or stand beside a wall for support.</li>
+          <li>Place your right foot fully on the step. Drive through that heel to push your whole body up onto the step.</li>
+          <li>Bring the left foot up to meet it. Then step back down, leading with the left foot.</li>
+          <li>Repeat leading with the right foot for all reps, then switch so the left leg leads.</li>
+          <li><strong>Key detail:</strong> The leading leg does all the work on the way up. Don't push off the trailing foot on the floor — let the step leg carry you.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>This is the most direct possible training for stair climbing — it's the exact movement, just controlled and repeatable.</li>
+          <li>Trains single-leg strength and the hip extension needed for each stair step, which walking on flat ground doesn't fully address.</li>
+        </ul>
+        <div class="tip-box">💡 At the gym, the bottom step of a stairwell or a low aerobics step works well. Keep a hand on the railing throughout — the goal is leg strength, not balance challenge here.</div>
+        <div class="safety-box">⚠️ Never do step-ups on a surface that could slide or tip. A fixed staircase bottom step is ideal. Avoid freestanding stools.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=step+ups+exercise+seniors+stair+training" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Seated Leg Extension -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🦵</div>
+        <div class="ex-info">
+          <div class="ex-name">Seated Knee Extension with Hold</div>
+          <div class="ex-prescription"><strong>10 reps per leg × 2 sets</strong> · Optional 1–2 lb ankle weight · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-seated">Seated</span><span class="ex-tag tag-gym">Gym</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Sit upright in a chair, both feet flat on floor.</li>
+          <li>Slowly straighten one leg until horizontal, foot flexed (toes toward you).</li>
+          <li>Hold at full extension for 3 seconds — feel the quad tighten above the kneecap.</li>
+          <li>Lower slowly over 3–4 seconds. Complete all reps then switch.</li>
+          <li>If using an ankle weight: strap 1 lb to start. Add weight only when 10 reps with a 3-sec hold feels easy.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Quadriceps are the primary muscle for stair climbing and fall recovery. Isolating them here complements the step-up work.</li>
+          <li>At the gym, this can also be done on a seated leg extension machine at very light weight.</li>
+        </ul>
+        <div class="progress-box">✅ If the gym has a leg extension machine, it's another option — set weight very light (the lightest available) and focus on the slow lowering phase.  Heavy weights on this machine can be difficult on the knees.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=seated+knee+extension+seniors+leg+machine" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Heel & Toe Raises - Progressed -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🦶</div>
+        <div class="ex-info">
+          <div class="ex-name">Single-Leg Calf Raises (once calf feels better)</div>
+          <div class="ex-prescription"><strong>8–10 reps per leg × 2 sets</strong> · Chair for light support · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-standing">Standing</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Stand behind a chair, both hands on the back. Shift weight to one foot, lifting the other slightly off the floor.</li>
+          <li>Rise slowly onto the ball of the standing foot. Hold 2 seconds at the top.</li>
+          <li>Lower slowly — don't drop. Take 3 seconds down.</li>
+          <li>Complete all reps on one side then switch. Use the chair for balance, not to push up from.</li>
+          <li>If single-leg is too challenging, do both feet together but focus on the slower lowering pace.</li>
+        </ol>
+        <h4>Why it's progressed</h4>
+        <ul>
+          <li>Two-legged calf raises are likely already easy. Single-leg doubles the load and more closely mimics the push-off phase of each walking step and stair ascent.</li>
+        </ul>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=single+leg+calf+raise+seniors+balance" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BALANCE TAB -->
+  <div class="tab-panel" id="tab-balance">
+    <div class="panel-intro">
+      <h3>Balance — Moving Beyond the Basics</h3>
+      <p>Walking unassisted means basic static balance is adequate. The focus now shifts to dynamic balance — controlling the body during movement, which is what actually prevents falls. These exercises are more challenging than weight-shifting but are appropriate for current level.</p>
+      <div class="time-badge">⏱ 8–10 minutes · Include 2–3 of these each session</div>
+    </div>
+
+    <!-- Tandem Walking -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">👣</div>
+        <div class="ex-info">
+          <div class="ex-name">Tandem Walking (Tightrope Walk)</div>
+          <div class="ex-prescription"><strong>10 steps forward, 10 back × 3 passes</strong> · Along a wall · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-balance">Balance</span><span class="ex-tag tag-standing">Walking</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Stand beside a wall or hallway so one hand can touch it if needed.</li>
+          <li>Place one foot directly in front of the other — heel touching (or almost touching) the toe of the back foot — and walk forward in this heel-to-toe line.</li>
+          <li>Take slow, deliberate steps. Keep eyes looking forward, not at your feet.</li>
+          <li>After 10 steps forward, pause, then walk backward in tandem the same way.</li>
+          <li>Touch the wall freely whenever balance wavers — this is expected and fine.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Moving tandem balance (walking) is significantly harder than standing tandem — and much more relevant to real-world fall scenarios, which happen during movement.</li>
+          <li>Backward walking additionally activates different muscle groups and challenges the brain-balance connection in ways forward walking doesn't.</li>
+        </ul>
+        <div class="tip-box">💡 A long hallway is ideal. The gym may have a quiet corridor. This exercise looks simple but is genuinely challenging — it's used in fall-prevention clinical programs.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=tandem+walking+heel+toe+balance+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Single Leg Stand -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🧍</div>
+        <div class="ex-info">
+          <div class="ex-name">Single-Leg Stand Holds</div>
+          <div class="ex-prescription"><strong>3 holds of 10–20 sec per side</strong> · Chair within reach · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-balance">Balance</span><span class="ex-tag tag-standing">Standing</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Stand behind a chair with both hands on the back. Shift all weight onto the right foot.</li>
+          <li>Lift the left foot just off the floor — even 1–2 inches is enough.</li>
+          <li>Hold as steadily as possible. Grip the chair freely if needed.</li>
+          <li>Start with 5–10 second holds. Build toward 20 seconds over several weeks.</li>
+          <li>Switch sides. Try to match the hold time on both sides — the weaker side will need more practice.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Every step involves a single-leg support phase. Stronger single-leg balance directly reduces stumbling and trip-to-fall conversion.</li>
+          <li>Research consistently shows single-leg stand training is one of the highest-impact fall prevention interventions for older adults.</li>
+        </ul>
+        <div class="progress-box">✅ Progression: Once 20 seconds both sides is easy with chair available, try with fingertips on the chair only (not gripping). Then one finger. Building toward no contact is a long-term goal.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=single+leg+stand+balance+training+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Sideways Walking -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">↔️</div>
+        <div class="ex-info">
+          <div class="ex-name">Lateral (Sideways) Walking</div>
+          <div class="ex-prescription"><strong>10 steps each direction × 3 passes</strong> · Along a wall · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-balance">Balance</span><span class="ex-tag tag-standing">Standing</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Stand beside a wall, feet together. Step sideways to the right — step out with the right foot, bring the left foot to meet it.</li>
+          <li>Take 10 controlled lateral steps. Keep feet from crossing over each other.</li>
+          <li>Return 10 steps to the left. The wall is there to touch if needed.</li>
+          <li>Keep a slight bend in the knees throughout — avoid stiff-legged waddling.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Most falls in older adults happen during sideways weight shifts — stepping to the side to avoid something, or catching a stumble. Lateral movement is vastly undertrained.</li>
+          <li>Activates the hip abductors (outer hip) which are typically very weak after prolonged inactivity.</li>
+        </ul>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=lateral+sideways+walking+exercise+seniors+balance" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOULDERS TAB -->
+  <div class="tab-panel" id="tab-shoulders">
+    <div class="panel-intro">
+      <h3>Shoulder Strength — Building on the Hand Bike</h3>
+      <p>The hand bike is already doing good work on shoulder and arm endurance. These exercises target the rotator cuff, upper back, and the pushing/pulling strength needed for functional tasks — getting up from the floor, pushing open doors, reaching overhead.</p>
+      <div class="time-badge">⏱ 8–10 minutes · Do after cardio, 2–3 exercises per session</div>
+    </div>
+
+    <div class="baseline-box">
+      <strong>Where we are now:</strong> Some shoulder weakness and pain. Hand bike is being used regularly. These exercises are likely new additions — introduce one or two at a time.
+    </div>
+
+    <!-- Seated Row with Band -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🎗️</div>
+        <div class="ex-info">
+          <div class="ex-name">Seated Row with Resistance Band</div>
+          <div class="ex-prescription"><strong>10–12 reps × 2 sets</strong> · Light band · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-seated">Seated</span><span class="ex-tag tag-gym">Gym</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Sit in a chair or on a bench. Loop a band around a stable post at chest height, or use a cable row machine at the gym at very light weight.</li>
+          <li>Hold one end of the band in each hand, arms extended forward.</li>
+          <li>Pull both hands toward your sides — elbows drive back past your ribs, shoulder blades squeeze together at the end.</li>
+          <li>Hold the contracted position 1–2 seconds. Return slowly — the slow return is where the work happens.</li>
+          <li>Keep upright posture throughout. Don't lean back to help the pull.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Trains the mid-back and rear shoulder — the muscles that oppose rounded posture and support the shoulder joint in daily function.</li>
+          <li>Pulling strength is often more important than pressing for older adults — it governs posture, door-opening, and getting up from surfaces.</li>
+        </ul>
+        <div class="tip-box">💡 At the gym, the seated cable row machine is perfect for this. Ask gym staff to set the weight at the minimum available — it will still be a good workout. The seat and chest pad make it very safe.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=seated+row+resistance+band+seniors+shoulder" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Band Pull-Aparts -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🪢</div>
+        <div class="ex-info">
+          <div class="ex-name">Band Pull-Aparts</div>
+          <div class="ex-prescription"><strong>12–15 reps × 2 sets</strong> · Light band · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-seated">Seated or Standing</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Hold a light band in both hands, arms extended at chest height, hands shoulder-width apart.</li>
+          <li>Keeping arms straight, pull the band apart by moving hands outward until the band touches your chest.</li>
+          <li>Squeeze shoulder blades together at peak stretch. Hold 2 seconds.</li>
+          <li>Return slowly. Keep tension in the band throughout — don't let it snap back.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Builds the rear deltoid and rhomboids — directly addresses the rounded-shoulder posture common in older adults and after prolonged inactivity.</li>
+          <li>Complements the hand bike, which works the front of the shoulder more than the back.</li>
+        </ul>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=band+pull+apart+shoulder+exercise+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Wall Slides -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">☝️</div>
+        <div class="ex-info">
+          <div class="ex-name">Wall Slides — Overhead Reach</div>
+          <div class="ex-prescription"><strong>8–10 reps × 2 sets</strong> · Pain-free range only · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-standing">Standing</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Stand facing a wall about 6 inches away. Place forearms flat against the wall at shoulder height.</li>
+          <li>Slowly slide both arms upward along the wall — as high as comfortable and pain-free.</li>
+          <li>Hold 2 seconds at the top. Slide back down slowly.</li>
+          <li>Only go as high as pain allows. Work within comfortable range — it will expand over weeks.</li>
+          <li>Keep back from arching — if it arches, that means you've gone high enough for today.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Trains overhead reach — getting items from shelves, dressing, washing hair. The wall makes it safe and supported.</li>
+          <li>Gradually restores shoulder mobility that tends to stiffen with age and reduced activity.</li>
+        </ul>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=wall+slide+exercise+shoulder+overhead+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <!-- Seated External Rotation -->
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🔄</div>
+        <div class="ex-info">
+          <div class="ex-name">Seated External Rotation with Band</div>
+          <div class="ex-prescription"><strong>10 reps × 2 sets per side</strong> · Very light band · 60 sec rest</div>
+          <div class="ex-tags"><span class="ex-tag tag-seated">Seated</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Sit with a light band looped around a door handle at elbow height beside you.</li>
+          <li>Hold with the arm closest to the anchor. Elbow bent at 90°, upper arm tucked against your side.</li>
+          <li>Rotate forearm outward (away from the anchor) as far as comfortable.</li>
+          <li>Hold 1 second, return slowly. Elbow stays pinned to the side the whole time.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Directly targets the rotator cuff — the stabilizing muscles of the shoulder joint. Weakness here is the most common source of shoulder pain in older adults.</li>
+          <li>Low load, high value. This exercise is unlikely to cause discomfort even with existing shoulder pain.</li>
+        </ul>
+        <div class="tip-box">💡 No band? Do this with no resistance — just rotate the forearm slowly against nothing. Still maintains the movement pattern and keeps the joint mobile.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=seated+external+rotation+band+rotator+cuff+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HANDS TAB -->
+  <div class="tab-panel" id="tab-hands">
+    <div class="panel-intro">
+      <h3>Hands — These are likely all New Exercises</h3>
+      <p>These are simple, require no equipment beyond a soft ball, and can be done while watching TV. The hand bike helps arm endurance but doesn't specifically target fine motor control or grip — these exercises fill that gap.</p>
+      <div class="time-badge">⏱ 5–8 minutes · Can be done daily, even on rest days</div>
+    </div>
+
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">✊</div>
+        <div class="ex-info">
+          <div class="ex-name">Soft Ball Squeeze</div>
+          <div class="ex-prescription"><strong>10 squeezes × 3 sets per hand</strong> · Soft foam ball or rolled towel</div>
+          <div class="ex-tags"><span class="ex-tag tag-hands">Hands</span><span class="ex-tag tag-seated">Seated</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Hold a soft foam ball or stress ball in one hand.</li>
+          <li>Squeeze firmly — about 70% of maximum effort. Not a maximum grip.</li>
+          <li>Hold the squeeze for 3 seconds. Release fully, letting fingers open wide.</li>
+          <li>Rest 2 seconds between squeezes. Complete all reps then switch.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Grip strength is a measurable marker of overall muscle health — and it's highly trainable at any age with consistent practice.</li>
+          <li>Affects daily function more than almost any other hand metric: opening jars, holding cups, using utensils, gripping a railing.</li>
+        </ul>
+        <div class="progress-box">✅ Progress over weeks: If the foam ball becomes easy, try a slightly firmer ball (like a tennis ball). The jump in resistance is significant — take it slowly.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=hand+grip+squeeze+ball+exercise+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🖐️</div>
+        <div class="ex-info">
+          <div class="ex-name">Finger Spreads & Tendon Glides</div>
+          <div class="ex-prescription"><strong>10 reps × 2 sets each hand</strong> · No equipment</div>
+          <div class="ex-tags"><span class="ex-tag tag-hands">Hands</span><span class="ex-tag tag-seated">Seated</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li><strong>Finger spreads:</strong> Start with fingers together. Spread them as wide as possible, hold 3 seconds, bring back together. Repeat 10 times.</li>
+          <li><strong>Tendon glides:</strong> Start with hand flat, fingers straight. Curl fingertips to touch the top of the palm (hook fist). Then curl fully into a fist. Then open flat. Move slowly through each position — don't rush.</li>
+          <li>Work within a comfortable range. Don't force painful positions.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Maintains the gliding ability of finger tendons — stiffness here is the main cause of reduced hand dexterity or discomfort in older adults.</li>
+          <li>Finger spreads activate intrinsic hand muscles essential for fine motor control — writing, handling small objects, fastening buttons.</li>
+        </ul>
+        <div class="tip-box">💡 A warm soak or warm towel on the hands for 5 minutes before these exercises significantly reduces arthritis stiffness and makes movement more comfortable.</div>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=finger+tendon+glides+hand+exercises+arthritis+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">👌</div>
+        <div class="ex-info">
+          <div class="ex-name">Thumb Opposition</div>
+          <div class="ex-prescription"><strong>2 full sequences per hand · Can be done anytime</strong> · No equipment</div>
+          <div class="ex-tags"><span class="ex-tag tag-hands">Hands</span><span class="ex-tag tag-seated">Seated</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li>Touch thumb to index finger, making a firm "O." Hold 2 seconds. Open.</li>
+          <li>Touch thumb to middle finger. Hold 2 seconds. Open.</li>
+          <li>Continue to ring finger, then little finger. That is one sequence.</li>
+          <li>Reverse — little finger back to index. Work slowly and deliberately.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Thumb opposition underlies nearly all hand function. Loss of it affects independence with dressing, eating, and self-care more than any other hand movement.</li>
+          <li>Takes 2 minutes and can be done during any sitting activity — TV, mealtime, waiting.</li>
+        </ul>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=thumb+opposition+exercise+hand+dexterity+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+
+    <div class="ex-card" onclick="toggleEx(this)">
+      <div class="ex-header">
+        <div class="ex-icon">🌊</div>
+        <div class="ex-info">
+          <div class="ex-name">Wrist Circles & Forearm Stretches</div>
+          <div class="ex-prescription"><strong>10 circles each direction · 20 sec holds</strong></div>
+          <div class="ex-tags"><span class="ex-tag tag-hands">Hands</span><span class="ex-tag tag-seated">Seated</span></div>
+        </div>
+        <div class="ex-chevron">▾</div>
+      </div>
+      <div class="ex-body">
+        <h4>How to perform</h4>
+        <ol>
+          <li><strong>Circles:</strong> Forearms resting on thighs. Gently rotate each wrist — 10 clockwise, 10 counterclockwise. Slow and full range.</li>
+          <li><strong>Flexion stretch:</strong> Extend one arm forward, palm down. Use the other hand to gently press the back of the extended hand downward. Hold 20 seconds. Feel the stretch along the top of the forearm.</li>
+          <li><strong>Extension stretch:</strong> Same arm, palm now facing up. Gently press fingers back toward you. Hold 20 seconds. Feel the stretch in the underside of the forearm.</li>
+        </ol>
+        <h4>Why it matters</h4>
+        <ul>
+          <li>Wrist mobility feeds directly into hand strength — a stiff wrist reduces grip by 30–40%. These stretches are quick and meaningful.</li>
+          <li>Also reduces risk of wrist pain during hand bike use.</li>
+        </ul>
+        <a class="video-btn" href="https://www.youtube.com/results?search_query=wrist+stretch+forearm+flexibility+seniors" target="_blank">▶ Search video guide</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end tab panels -->
+
+<!-- Progress markers -->
+<div class="section-title" style="margin-top:32px;">Tracking Progress</div>
+<div class="progress-section">
+  <div class="prog-card">
+    <h4>✅ Meaningful milestones to watch for over the next 6–8 weeks</h4>
+    <ul>
+      <li>Sit-to-stand without arm support for a full set of 10</li>
+      <li>Step-ups feeling noticeably easier — less effort per step</li>
+      <li>Stairs feeling less like a challenge and more like a routine</li>
+      <li>Single-leg balance holds reaching 15–20 seconds without gripping the chair</li>
+      <li>Bike duration increasing — riding longer without fatigue at the same resistance</li>
+      <li>Grip feeling stronger — noticeable in daily activities like opening jars or holding bags</li>
+    </ul>
+  </div>
+  <div class="prog-card">
+    <h4>📆 Consider at any time and/or the 6–8 week mark</h4>
+    <ul>
+      <li>Ask the doctor about a formal PT reassessment — even one session to update the program and check progress objectively</li>
+      <li>Potentially discuss vitamin D levels — deficiency is extremely common and directly affects muscle strength and balance</li>
+      <li>If not previously done, a single orientation session on the machines with Warren could open up more options safely</li>
+    </ul>
+  </div>
+  <div class="prog-card">
+    <h4>⚠️ Signs to contact the doctor</h4>
+    <ul>
+      <li>Any chest pain, pressure, or unusual shortness of breath during exercise</li>
+      <li>A fall — even minor — particularly on a hard surface</li>
+      <li>New or worsening numbness or tingling in hands or legs</li>
+      <li>Significant joint swelling after sessions that doesn't resolve overnight</li>
+      <li>Sudden unexplained fatigue or weakness that persists across multiple days</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <strong>Note:</strong> This program is general information based on the situation described and is not a substitute for individualized medical advice. The physician and any treating physical therapists remain the best guides for his specific situation. The progress made in the prior 4 months is exceptional based on the breadth of data available — this program is designed to build on that momentum.
+</footer>
+
+</div><!-- end container -->
+
+<script>
+function toggleEx(card) { card.classList.toggle('open'); }
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
