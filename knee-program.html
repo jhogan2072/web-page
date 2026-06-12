@@ -191,7 +191,7 @@
 
   .card-header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
     padding: 20px 24px;
     cursor: pointer;
@@ -206,6 +206,7 @@
     color: var(--accent);
     font-weight: 600;
     min-width: 24px;
+    padding-top: 3px;
   }
 
   .card-title-block { flex: 1; }
@@ -237,22 +238,23 @@
     font-style: normal;
   }
 
-  .rx-badges {
+  .rx-pill-row {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
     align-items: center;
+    gap: 8px;
+    margin-top: 5px;
   }
-  .badge {
+  .rx-pill {
+    display: inline-block;
     font-size: 12px;
-    font-weight: 600;
-    padding: 4px 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
     border-radius: 100px;
     background: var(--surface2);
-    color: var(--ink-muted);
+    color: var(--accent);
     white-space: nowrap;
   }
-  .badge span { color: var(--accent); }
 
   .chevron {
     width: 20px; height: 20px;
@@ -262,6 +264,7 @@
     color: var(--ink-muted);
     transition: transform 0.25s;
     flex-shrink: 0;
+    margin-top: 3px;
   }
   details[open] .chevron { transform: rotate(180deg); }
 
@@ -278,7 +281,6 @@
   }
   @media (max-width: 640px) {
     .instruction-grid { grid-template-columns: 1fr; }
-    .rx-badges { display: none; }
   }
 
   .instruction-block {
@@ -415,12 +417,8 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">01</span>
-        <div class="card-title-block"><h2>Single Leg Bridge</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Single Leg Bridge</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -431,7 +429,7 @@
           <div class="instruction-block"><h3>Form Check</h3><p>Keep core engaged throughout. Don't allow your back to arch or your hips to drop to either side.</p></div>
         </div>
         <div class="tip-block"><strong>Tip</strong>Keep your stomach muscles engaged the entire time — this is what protects your lower back and keeps your hips level.</div>
-        <a class="video-link" href="https://youtu.be/81Rl4KUipvQ?t=14" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=eRq0TLfgH6c" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -442,12 +440,9 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">02</span>
-        <div class="card-title-block"><h2>Squat</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Squat</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
+          <div class="card-note">Increase difficulty by holding a dumbbell between your hands</div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -458,7 +453,7 @@
           <div class="instruction-block"><h3>Form Check</h3><p>Keep your back straight. Do not let your knees travel forward past your toes.</p></div>
         </div>
         <div class="tip-block"><strong>Tip</strong>Think of sitting back into a chair — keep weight in your heels and your chest tall throughout the movement.</div>
-        <a class="video-link" href="https://youtu.be/KJ8xAMJdZjQ?t=20" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=q1vWdL8dXiU" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -469,12 +464,8 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">03</span>
-        <div class="card-title-block"><h2>Side Stepping with Resistance at Ankles</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Side Stepping with Resistance at Ankles</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -496,12 +487,8 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">04</span>
-        <div class="card-title-block"><h2>Lateral Step Down</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Lateral Step Down</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -512,7 +499,7 @@
           <div class="instruction-block"><h3>Form Check</h3><p>Do not let your trunk lean forward or your standing knee collapse inward as you lower down.</p></div>
         </div>
         <div class="tip-block"><strong>Tip</strong>Control the descent — slow is better. Most of the benefit comes from the eccentric (lowering) phase.</div>
-        <a class="video-link" href="https://www.youtube.com/watch?v=tOplbmmW2Rg" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=wNXzEoRiB9U" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -525,13 +512,8 @@
         <span class="exercise-num">05</span>
         <div class="card-title-block">
           <h2>Runner's Step Up/Down</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
           <div class="card-note">Perform on 12″ step, or 8″ step with added weight</div>
-        </div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -564,12 +546,8 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">01</span>
-        <div class="card-title-block"><h2>Single Leg Bridge</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Single Leg Bridge</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -580,7 +558,7 @@
           <div class="instruction-block"><h3>Form Check</h3><p>Keep core engaged throughout. Don't allow your back to arch or your hips to drop to either side.</p></div>
         </div>
         <div class="tip-block"><strong>Tip</strong>Keep your stomach muscles engaged the entire time — this is what protects your lower back and keeps your hips level.</div>
-        <a class="video-link" href="https://www.youtube.com/results?search_query=single+leg+bridge+exercise+physical+therapy" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=eRq0TLfgH6c" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -591,12 +569,9 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">02</span>
-        <div class="card-title-block"><h2>Squat</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Squat</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
+          <div class="card-note">Increase difficulty by holding a dumbbell between your hands</div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -607,7 +582,7 @@
           <div class="instruction-block"><h3>Form Check</h3><p>Keep your back straight. Do not let your knees travel forward past your toes.</p></div>
         </div>
         <div class="tip-block"><strong>Tip</strong>Think of sitting back into a chair — keep weight in your heels and your chest tall throughout the movement.</div>
-        <a class="video-link" href="https://youtu.be/KJ8xAMJdZjQ?t=20" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=q1vWdL8dXiU" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -618,12 +593,8 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">03</span>
-        <div class="card-title-block"><h2>Side Stepping with Resistance at Ankles</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Side Stepping with Resistance at Ankles</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -645,12 +616,8 @@
     <details class="exercise-card">
       <summary class="card-header">
         <span class="exercise-num">04</span>
-        <div class="card-title-block"><h2>Lateral Step Down</h2></div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+        <div class="card-title-block"><h2>Lateral Step Down</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -661,7 +628,7 @@
           <div class="instruction-block"><h3>Form Check</h3><p>Do not let your trunk lean forward or your standing knee collapse inward as you lower down.</p></div>
         </div>
         <div class="tip-block"><strong>Tip</strong>Control the descent — slow is better. Most of the benefit comes from the eccentric (lowering) phase.</div>
-        <a class="video-link" href="https://www.youtube.com/watch?v=tOplbmmW2Rg" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=wNXzEoRiB9U" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -674,13 +641,8 @@
         <span class="exercise-num">05</span>
         <div class="card-title-block">
           <h2>Runner's Step Up/Down</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div></div>
           <div class="card-note">Perform on 12″ step, or 8″ step with added weight</div>
-        </div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -703,14 +665,9 @@
       <summary class="card-header">
         <span class="exercise-num">06</span>
         <div class="card-title-block">
-          <h2>Single Leg Knee Extension <span class="new-badge">New</span></h2>
+          <h2>Single Leg Knee Extension</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div><span class="new-badge">New</span></div>
           <div class="card-note">Weight machine · Should not be painful — reduce weight or skip if it is</div>
-        </div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -722,7 +679,7 @@
         </div>
         <div class="warning-block"><strong>Important</strong>This exercise should not be painful. If you feel pain during the movement, reduce the weight. If pain persists, skip this exercise and let your PT know.</div>
         <div class="tip-block"><strong>Tip</strong>Engage the platform lock every time you finish — don't skip this step.</div>
-        <a class="video-link" href="https://www.youtube.com/watch?v=cxb1hTQ96n8" target="_blank" rel="noopener">
+        <a class="video-link" href="https://www.youtube.com/watch?v=TxXH-0HPD2s" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
           Watch video demo
         </a>
@@ -734,13 +691,8 @@
       <summary class="card-header">
         <span class="exercise-num">07</span>
         <div class="card-title-block">
-          <h2>Romanian Deadlift (RDL) <span class="new-badge">New</span></h2>
-        </div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
+          <h2>Romanian Deadlift (RDL)</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div><span class="new-badge">New</span></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
@@ -763,14 +715,9 @@
       <summary class="card-header">
         <span class="exercise-num">08</span>
         <div class="card-title-block">
-          <h2>Single Leg Press <span class="new-badge">New</span></h2>
+          <h2>Single Leg Press</h2>
+          <div class="rx-pill-row"><div class="rx-pill">3 × 10</div><span class="new-badge">New</span></div>
           <div class="card-note">Weight machine</div>
-        </div>
-        <div class="rx-badges">
-          <div class="badge">Reps <span>10</span></div>
-          <div class="badge">Sets <span>3</span></div>
-          <div class="badge">Daily <span>1×</span></div>
-          <div class="badge">Weekly <span>3–4×</span></div>
         </div>
         <div class="chevron"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </summary>
