@@ -3,835 +3,1407 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shoulder Rehab Program</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Shoulder Strength & Mobility Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f0e8;
-    --surface: #fffdf9;
-    --ink: #1a1612;
-    --ink-muted: #6b6460;
-    --accent: #c84b2f;
-    --accent-light: #f5e8e4;
-    --accent2: #2f6bc8;
-    --accent2-light: #e4ecf5;
-    --border: #e0d8cc;
-    --week1: #e8f0e8;
-    --week2: #e8ecf5;
-    --week3: #f5f0e0;
+    --bg: #1a2332;
+    --bg2: #1f2d40;
+    --surface: #243245;
+    --surface2: #2a3a52;
+    --ink: #e8e0d4;
+    --ink-muted: #8a9bb0;
+    --accent: #7eb8a0;
+    --accent-light: rgba(126,184,160,0.12);
+    --warm: #d4a96a;
+    --warm-light: rgba(212,169,106,0.12);
+    --red: #d47a6a;
+    --red-light: rgba(212,122,106,0.10);
+    --border: rgba(255,255,255,0.08);
+    --radius: 12px;
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     background: var(--bg);
     color: var(--ink);
     min-height: 100vh;
-    padding: 0 0 60px;
+    padding-bottom: 60px;
+    font-size: 16px;
+    line-height: 1.6;
   }
+
+  /* ── HEADER ── */
   header {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 48px 32px 40px;
+    background: linear-gradient(135deg, #0f1a26 0%, #1a3045 100%);
+    padding: 52px 32px 44px;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--border);
   }
-  header::after {
-    content: '';
+  .orb {
     position: absolute;
-    right: -60px; bottom: -60px;
-    width: 220px; height: 220px;
     border-radius: 50%;
-    border: 40px solid rgba(200,75,47,0.18);
+    pointer-events: none;
   }
-  header::before {
-    content: '';
-    position: absolute;
-    right: 40px; bottom: 20px;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    border: 2px solid rgba(200,75,47,0.25);
+  .orb1 {
+    width: 320px; height: 320px;
+    right: -80px; top: -80px;
+    background: radial-gradient(circle, rgba(126,184,160,0.13) 0%, transparent 70%);
   }
-  .header-label {
+  .orb2 {
+    width: 180px; height: 180px;
+    right: 80px; bottom: -40px;
+    background: radial-gradient(circle, rgba(212,169,106,0.08) 0%, transparent 70%);
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .header-tag {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 5vw, 42px);
-    line-height: 1.15;
-    max-width: 480px;
+    font-family: 'Lora', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.2;
+    color: var(--ink);
+    max-width: 520px;
   }
+  header h1 em { font-style: italic; color: var(--warm); }
   header p {
     margin-top: 14px;
-    font-size: 14px;
-    color: #b0a898;
-    max-width: 420px;
-    line-height: 1.6;
+    font-size: 15px;
+    color: var(--ink-muted);
+    max-width: 500px;
   }
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 20px;
-  }
-  .badge {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #d0c8be;
-    font-size: 11px;
+  .header-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .header-badge {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--ink-muted);
+    font-size: 12px;
     font-weight: 500;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 100px;
-    letter-spacing: 0.5px;
   }
 
-  .container { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  /* ── CONTAINER (shared) ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-  /* Principles */
-  .principles {
+  /* ── SUPPLEMENTARY INFO PANELS (ground rules, pain scale, etc.) ── */
+  .info-panel {
     background: var(--surface);
-    border-left: 3px solid var(--accent);
-    margin: 28px 20px;
-    padding: 20px 24px;
-    border-radius: 0 8px 8px 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin: 24px 0;
   }
-  .principles h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    margin-bottom: 12px;
+  .info-panel h2 {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 14px;
   }
-  .principles ul {
+  .info-panel ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
   }
-  .principles li {
-    font-size: 13.5px;
+  .info-panel li {
+    font-size: 14px;
     color: var(--ink-muted);
-    padding-left: 18px;
+    padding-left: 20px;
     position: relative;
-    line-height: 1.5;
+    line-height: 1.55;
   }
-  .principles li::before {
+  .info-panel li::before {
     content: '→';
     position: absolute;
     left: 0;
     color: var(--accent);
     font-size: 12px;
   }
+  .info-panel p { font-size: 14px; color: var(--ink-muted); line-height: 1.65; }
+  .info-panel p + p { margin-top: 10px; }
 
-  /* Week tabs */
+  .pain-scale-row { display: flex; gap: 4px; margin: 14px 0 8px; }
+  .pain-block {
+    flex: 1; height: 30px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: white;
+  }
+  .pain-labels { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--ink-muted); margin-bottom: 10px; }
+
+  .milestone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .milestone-grid { grid-template-columns: 1fr; } }
+  .milestone-col h3 {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .milestone-col.good h3 { color: var(--accent); }
+  .milestone-col.watch h3 { color: var(--red); }
+
+  /* ── WEEK/LEVEL TABS ── */
   .week-nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin-top: 8px;
+  }
+  .week-nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
     display: flex;
-    gap: 6px;
-    padding: 0 20px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
+  .week-nav-inner::-webkit-scrollbar { display: none; }
+
   .week-tab {
-    padding: 8px 18px;
-    border-radius: 100px;
-    border: 1.5px solid var(--border);
-    background: var(--surface);
+    flex-shrink: 0;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
+    padding: 14px 18px 12px;
     cursor: pointer;
-    transition: all 0.2s;
     color: var(--ink-muted);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: inherit;
+    position: relative;
   }
+  .week-tab:hover { color: var(--ink); }
   .week-tab.active {
-    background: var(--ink);
-    color: white;
-    border-color: var(--ink);
+    color: var(--accent);
+    border-bottom-color: var(--accent);
   }
 
-  /* Phase sections */
-  .phase { display: none; padding: 0 20px; }
-  .phase.active { display: block; }
+  /* ── WEEK/LEVEL PANELS ── */
+  .week-panel { display: none; }
+  .week-panel.active { display: block; }
 
-  .phase-header {
-    margin-bottom: 20px;
-    padding: 18px 20px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
+  .week-panel .container { margin: 32px auto; }
+
+  .section-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
   }
-  .phase-header h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    margin-bottom: 6px;
-  }
-  .phase-header p {
+  .section-sub {
     font-size: 13.5px;
     color: var(--ink-muted);
+    margin-bottom: 20px;
     line-height: 1.55;
   }
-  .phase-1 .phase-header { background: var(--week1); }
-  .phase-2 .phase-header { background: var(--week2); }
-  .phase-3 .phase-header { background: var(--week3); }
 
-  /* Day sections */
-  .day-group { margin-bottom: 24px; }
-  .day-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .day-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* Exercise cards */
+  /* ── EXERCISE CARD ── */
   .exercise-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
     overflow: hidden;
-    transition: box-shadow 0.2s;
+    transition: border-color 0.2s;
   }
-  .exercise-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+  .exercise-card:hover { border-color: rgba(126,184,160,0.3); }
 
   .card-header {
     display: flex;
-    align-items: center;
-    padding: 14px 16px;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
     cursor: pointer;
-    gap: 12px;
     user-select: none;
+    list-style: none;
   }
-  .card-icon {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-  .priority-1 .card-icon { background: #fde8e4; }
-  .priority-2 .card-icon { background: #e4ecf5; }
-  .priority-3 .card-icon { background: #e8f0e8; }
-  .priority-4 .card-icon { background: #f5f0e0; }
+  .card-header::-webkit-details-marker { display: none; }
 
-  .card-title-group { flex: 1; }
-  .card-title {
-    font-size: 15px;
+  .exercise-num {
+    font-family: 'Lora', serif;
+    font-size: 13px;
+    color: var(--accent);
     font-weight: 600;
+    min-width: 24px;
+    padding-top: 3px;
+  }
+
+  .card-title-block { flex: 1; }
+  .card-title-block h2 {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
     line-height: 1.3;
   }
-  .card-meta {
-    font-size: 12px;
-    color: var(--ink-muted);
+  .card-note {
+    font-size: 13px;
+    color: var(--warm);
     margin-top: 2px;
+    font-style: italic;
   }
-  .card-expand {
-    font-size: 18px;
-    color: var(--ink-muted);
-    transition: transform 0.25s;
-    flex-shrink: 0;
-  }
-  .exercise-card.open .card-expand { transform: rotate(180deg); }
-
-  .card-body {
-    display: none;
-    padding: 0 16px 16px;
-    border-top: 1px solid var(--border);
-  }
-  .exercise-card.open .card-body { display: block; }
-
-  .card-body h4 {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin: 14px 0 7px;
-  }
-  .card-body ol, .card-body ul {
-    padding-left: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .card-body li {
-    font-size: 13.5px;
-    color: var(--ink);
-    line-height: 1.55;
-  }
-  .card-body .note {
-    background: #fff8e8;
-    border-left: 3px solid #e8a820;
-    padding: 10px 14px;
-    border-radius: 0 6px 6px 0;
-    font-size: 13px;
-    color: #6b5a20;
-    margin-top: 12px;
-    line-height: 1.5;
-  }
-  .card-body .nerve-note {
-    background: var(--accent-light);
-    border-left: 3px solid var(--accent);
-    padding: 10px 14px;
-    border-radius: 0 6px 6px 0;
-    font-size: 13px;
-    color: #7a2a18;
-    margin-top: 8px;
-    line-height: 1.5;
-  }
-  .video-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent2);
-    text-decoration: none;
-    border: 1px solid var(--accent2);
-    padding: 5px 12px;
-    border-radius: 6px;
-    transition: background 0.15s;
-  }
-  .video-link:hover { background: var(--accent2-light); }
-
-  .sets-badge {
+  .new-badge {
     display: inline-block;
-    background: var(--ink);
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--warm);
+    color: #0f1a26;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-style: normal;
+  }
+
+  .rx-pill-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+  }
+  .rx-pill {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     padding: 3px 10px;
     border-radius: 100px;
-    margin-right: 6px;
-    letter-spacing: 0.5px;
+    background: var(--surface2);
+    color: var(--accent);
+    white-space: nowrap;
   }
 
-  .rest-day {
-    background: var(--surface);
-    border: 1px dashed var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    font-size: 14px;
-    color: var(--ink-muted);
-    margin-bottom: 10px;
-  }
-
-  /* Pain scale */
-  .pain-scale {
-    margin: 28px 20px 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px 24px;
-  }
-  .pain-scale h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-  .scale-row {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 10px;
-  }
-  .scale-block {
-    flex: 1;
-    height: 28px;
-    border-radius: 4px;
+  .chevron {
+    width: 20px; height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: white;
-  }
-  .scale-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
     color: var(--ink-muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  details[open] .chevron { transform: rotate(180deg); }
+
+  .card-body {
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .instruction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  @media (max-width: 640px) {
+    .instruction-grid { grid-template-columns: 1fr; }
+  }
+
+  .instruction-block {
+    background: var(--bg2);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .instruction-block h3 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
     margin-bottom: 8px;
   }
-  .pain-rule { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+  .instruction-block p {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
 
-  footer {
-    margin: 40px 20px 0;
-    padding: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 12px;
+  .tip-block {
+    margin-top: 14px;
+    background: var(--warm-light);
+    border-left: 3px solid var(--warm);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .tip-block strong {
+    color: var(--warm);
+    font-weight: 600;
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .warning-block {
+    margin-top: 14px;
+    background: var(--red-light);
+    border-left: 3px solid var(--red);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .warning-block strong {
+    color: var(--red);
+    font-weight: 600;
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 9px 18px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--ink-muted);
-    line-height: 1.6;
-    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .video-link:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(126,184,160,0.3);
+  }
+  .video-link svg { flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .disclaimer-panel {
+    max-width: 860px;
+    margin: 8px auto 0;
+    padding: 0 32px;
+  }
+  .disclaimer-panel .info-panel { font-size: 13px; }
+  .disclaimer-panel .info-panel strong { color: var(--red); }
+
+  .page-footer {
+    max-width: 860px;
+    margin: 24px auto 0;
+    padding: 24px 32px 0;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-label">Post-Dislocation · Axillary Nerve Recovery</div>
-  <h1>Shoulder Rehabilitation Program</h1>
-  <p>A progressive 3-phase program for greater tuberosity fracture recovery with axillary nerve involvement. 16+ months post-injury.</p>
-  <div class="badges">
-    <span class="badge">Cleared for full activity</span>
-    <span class="badge">Nerve recovery ongoing</span>
-    <span class="badge">No formal PT</span>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="header-inner">
+    <div class="header-tag">Post-Dislocation Recovery · Shoulder Program</div>
+    <h1>Shoulder <em>Strength & Mobility</em> Program</h1>
+    <p>Combines home exercises from Professional Physical Therapy (Lauren Kelley, PT) with a self-directed strength progression. Organized by intensity level — move through Level 1, 2, and 3 as tolerated, not by calendar week.</p>
+    <div class="header-badges">
+      <span class="header-badge">Cleared for full activity</span>
+      <span class="header-badge">Nerve recovery ongoing</span>
+      <span class="header-badge">Full gym access</span>
+    </div>
   </div>
 </header>
 
 <div class="container">
-  <div class="principles">
+
+  <!-- GROUND RULES -->
+  <div class="info-panel">
     <h2>Ground Rules</h2>
     <ul>
       <li>Pain during exercise: stay at or below 3/10. Sharp pain = stop immediately.</li>
       <li>Pain after exercise: should not linger more than 60 minutes post-session.</li>
       <li>Clicks/catches: OK to work through if they're not sharp or worsening.</li>
       <li>Deltoid fatigues fast — take full 90–120 sec rest between sets, no exceptions.</li>
-      <li>Use higher reps (15–20) and lighter weight. Endurance before strength.</li>
+      <li>Use higher reps (15–20) and lighter weight where a range is given. Endurance before strength.</li>
       <li>Progress only when you can complete all sets with pain ≤ 2/10.</li>
     </ul>
   </div>
+
+  <!-- PAIN SCALE -->
+  <div class="info-panel">
+    <h2>Pain Scale Reference</h2>
+    <div class="pain-scale-row">
+      <div class="pain-block" style="background:#4caf50;">0</div>
+      <div class="pain-block" style="background:#8bc34a;">1</div>
+      <div class="pain-block" style="background:#cddc39; color:#2a2a2a;">2</div>
+      <div class="pain-block" style="background:#ffeb3b; color:#2a2a2a;">3</div>
+      <div class="pain-block" style="background:#ffc107; color:#2a2a2a;">4</div>
+      <div class="pain-block" style="background:#ff9800;">5</div>
+      <div class="pain-block" style="background:#f44336;">6</div>
+      <div class="pain-block" style="background:#e53935;">7</div>
+      <div class="pain-block" style="background:#c62828;">8</div>
+      <div class="pain-block" style="background:#b71c1c;">9</div>
+      <div class="pain-block" style="background:#7f0000;">10</div>
+    </div>
+    <div class="pain-labels"><span>No pain</span><span>Exercise limit → 3</span><span>Severe</span></div>
+    <p>Work in the green–yellow zone. If you hit orange during a set, reduce range of motion first, then weight. Stop if you hit red.</p>
+  </div>
+
+  <!-- HOW LEVELS WORK -->
+  <div class="info-panel">
+    <h2>How the Levels Work</h2>
+    <p>Levels represent intensity and technical demand, not weeks. Start with Level 1 and make sure those exercises feel controlled and pain-free before adding Level 2 work, then Level 3.</p>
+    <p>Many Level 1 exercises — the rotation work and scapular exercises especially — are worth keeping in your rotation as a warm-up even once you've moved on to Level 2 and 3. Aim for 3–4 sessions per week with at least one rest day between sessions that hit similar movement patterns.</p>
+  </div>
+
 </div>
 
-<!-- Pain Scale -->
-<div class="pain-scale" style="max-width:760px;margin:0 auto 0;padding:20px 20px 0;">
-  <div style="padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
-    <h3>Pain Scale Reference</h3>
-    <div class="scale-row">
-      <div class="scale-block" style="background:#4caf50;">0</div>
-      <div class="scale-block" style="background:#8bc34a;">1</div>
-      <div class="scale-block" style="background:#cddc39;">2</div>
-      <div class="scale-block" style="background:#ffeb3b; color:#555;">3</div>
-      <div class="scale-block" style="background:#ffc107; color:#555;">4</div>
-      <div class="scale-block" style="background:#ff9800;">5</div>
-      <div class="scale-block" style="background:#f44336;">6</div>
-      <div class="scale-block" style="background:#e53935;">7</div>
-      <div class="scale-block" style="background:#c62828;">8</div>
-      <div class="scale-block" style="background:#b71c1c;">9</div>
-      <div class="scale-block" style="background:#7f0000;">10</div>
-    </div>
-    <div class="scale-labels"><span>No pain</span><span>Exercise limit → 3</span><span>Severe</span></div>
-    <p class="pain-rule">Work in the green-yellow zone. If you hit orange during a set, reduce range of motion first, then weight. Stop if you hit red.</p>
+<!-- LEVEL TABS -->
+<nav class="week-nav">
+  <div class="week-nav-inner">
+    <button class="week-tab active" onclick="showWeek(1)" id="tab-1">Level 1</button>
+    <button class="week-tab" onclick="showWeek(2)" id="tab-2">Level 2</button>
+    <button class="week-tab" onclick="showWeek(3)" id="tab-3">Level 3</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════ LEVEL 1 ══════════════════════ -->
+<div class="week-panel active" id="panel-1">
+  <div class="container">
+    <div class="section-label">Level 1 — Foundational</div>
+    <div class="section-sub">Restore mechanics: gentle assisted range of motion, rotator cuff activation, scapular control. Sets/reps vary by exercise — see each card. Most of these can be done most days of the week.</div>
+
+    <!-- 1: Active Assisted Flexion -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">01</span>
+        <div class="card-title-block">
+          <h2>Active Assisted Flexion</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 15</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · highest pulley position</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand facing a dual-arm functional trainer with the pulley set to its highest position and a light weight selected on the stack. Attach a single handle and hold it with your involved hand, starting with your arm pulled down at your side.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Relax your arm and let the weight stack's own descent retract the cable back toward the pulley, lifting your arm up into flexion in front of you. Then actively pull the handle back down to your side against the weight, controlling the return.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your torso upright throughout — don't lean back or use your body to help the lift; let the weight stack do the work. Control the downward pull smoothly rather than letting the weight yank your arm down.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          Select just enough weight to comfortably lift your arm — too little and there's no real assist, too much and you'll fight the stack on the way down. As strength returns, reduce the weight, and eventually graduate to the Cable Front Raise in Level 2 for the unassisted version of this same movement.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=assisted+shoulder+flexion+cable+pulley+weight+stack" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 2: Active Assisted Abduction -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">02</span>
+        <div class="card-title-block">
+          <h2>Active Assisted Abduction</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 15</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · highest pulley position</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand sideways next to a dual-arm functional trainer, involved arm closest to the machine, pulley set to its highest position with a light weight selected on the stack. Hold the handle with your involved hand, starting with your arm pulled down at your side.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Relax your arm and let the weight stack's own descent retract the cable back toward the pulley, guiding your arm up and out to the side into abduction. Then actively pull the handle back down to your side against the weight, controlling the return.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Avoid shrugging your shoulder up toward your ear as the arm rises — let the weight stack do the lifting rather than compensating with your neck and traps.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          Same weight-selection principle as Active Assisted Flexion: enough to lift comfortably, not so much that lowering it back down feels like a fight.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=assisted+shoulder+abduction+cable+pulley+weight+stack" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 3: Shoulder External Rotation -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">03</span>
+        <div class="card-title-block">
+          <h2>Shoulder External Rotation</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · towel roll under arm</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand sideways next to a dual-arm functional trainer with the pulley at elbow height, anchored on the side closest to your involved arm so the cable crosses in front of your body. Hold the handle with your elbow bent 90° and tucked at your side, a small towel roll wedged under your arm.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Rotate your forearm outward, away from the machine, pulling against the resistance. Hold briefly, then slowly return to the starting position.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep hips and shoulders facing forward — don't let your torso rotate to help. Maintain a gentle chin tuck and avoid shrugging.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          This is one of the most important exercises for shoulder stability — it isolates the small rotator cuff muscles that keep the ball of the joint centered.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=cable+shoulder+external+rotation+functional+trainer" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 4: Shoulder Internal Rotation -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">04</span>
+        <div class="card-title-block">
+          <h2>Shoulder Internal Rotation</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · towel roll under arm</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand sideways next to a dual-arm functional trainer with the pulley at elbow height, anchored on the side away from your involved arm. Hold the handle with your elbow bent 90° and tucked at your side, towel roll under your arm.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Slowly rotate your arm inward across your body, then return slowly to the starting position.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep hips and shoulders facing forward and maintain a gentle chin tuck throughout.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=cable+shoulder+internal+rotation+functional+trainer" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 5: Standing Shoulder Internal Rotation Stretch with Towel -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">05</span>
+        <div class="card-title-block">
+          <h2>Standing Shoulder Internal Rotation Stretch with Towel</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × hold 30 sec</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Towel · static stretch</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand upright, holding both ends of a towel — one arm reaches up and behind your head, the other reaches behind your mid-to-low back.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Slowly straighten your top arm, gently pulling the towel upward with your bottom hand until you feel a stretch. Hold, then release.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your back straight throughout — avoid arching or leaning to manufacture extra range.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=standing+shoulder+internal+rotation+stretch+towel" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 6: Standing Overhead Shoulder External Rotation Stretch with Towel -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">06</span>
+        <div class="card-title-block">
+          <h2>Standing Overhead Shoulder External Rotation Stretch with Towel</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × hold 30 sec</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Towel · static stretch</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand upright holding a towel — one hand behind your head, the other behind your back.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Slowly straighten your bottom arm, gently pulling downward on the towel until you feel a stretch through the top arm. Hold this position.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Maintain upright posture and a relaxed neck throughout — don't crane your neck forward to compensate.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=standing+overhead+shoulder+external+rotation+stretch+towel" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 7: Prone Shoulder Extension on Swiss Ball -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">07</span>
+        <div class="card-title-block">
+          <h2>Prone Shoulder Extension on Swiss Ball with Dumbbells</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Swiss ball · light dumbbells</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Lie face-down with your chest resting on a swiss ball, feet on the floor behind you, holding a light dumbbell in each hand with arms hanging down.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Raise both arms straight backward as far as comfortable, then lower them back down and repeat.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your back straight and think about squeezing your shoulder blades together as your arms rise.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=prone+shoulder+extension+swiss+ball+dumbbells" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 8: Prone Middle Trapezius -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">08</span>
+        <div class="card-title-block">
+          <h2>Prone Middle Trapezius with Legs Straight and Dumbbells on Swiss Ball</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Swiss ball · light dumbbells</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Lie face-down with your chest on a swiss ball, legs extended straight behind you, holding a light dumbbell in each hand.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Raise both arms out to your sides with elbows straight and thumbs pointing up, then lower back down and repeat.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your back straight and don't let your shoulders shrug up toward your ears during the lift.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=prone+middle+trapezius+swiss+ball+dumbbells" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 9: Prone Scapular Retraction on Swiss Ball -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">09</span>
+        <div class="card-title-block">
+          <h2>Prone Scapular Retraction on Swiss Ball</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Swiss ball · bodyweight</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Begin on all fours with your trunk resting on a swiss ball, knees on the floor behind you.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Bending at the elbows, pull your arms upward, then lower them back to the ground and repeat.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Focus on squeezing your shoulder blades together as you lift, rather than just bending the elbows.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=prone+scapular+retraction+swiss+ball" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 10: Scaption -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">10</span>
+        <div class="card-title-block">
+          <h2>Scaption (Diagonal Raises)</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 12</span>
+          </div>
+          <div class="card-note">Light dumbbell (1–3 lb)</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand with feet shoulder-width apart, holding a light dumbbell in your involved hand, thumb turned slightly up.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Raise your arm along a diagonal plane about 30° in front of straight-out-to-the-side, up to shoulder height. Lower slowly over 3 seconds.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Don't force range beyond shoulder height early on, and don't let the shoulder shrug toward the ear.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          Your deltoid may fatigue after 6–8 reps given the nerve recovery still in progress. If quality drops, stop the set early rather than grinding through — poor mechanics here can reinforce the impingement pattern you're working to fix.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=scaption+exercise+shoulder+rehab" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 11: Standing Bicep Curls -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">11</span>
+        <div class="card-title-block">
+          <h2>Standing Bicep Curls Supinated with Dumbbells</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10–15</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dumbbells</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Stand upright holding a dumbbell in each hand, palms facing forward.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Slowly curl both dumbbells up toward your shoulders, then lower back down with control and repeat.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep palms facing forward and your back straight — don't shrug your shoulders or swing the weight up using momentum.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=standing+bicep+curl+supinated+dumbbells" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
   </div>
 </div>
 
-<!-- Week tabs -->
-<div style="max-width:760px;margin:24px auto 0;">
-  <div class="week-nav">
-    <button class="week-tab active" onclick="showPhase(1, this)">Phase 1 · Weeks 1–2</button>
-    <button class="week-tab" onclick="showPhase(2, this)">Phase 2 · Weeks 3–4</button>
-    <button class="week-tab" onclick="showPhase(3, this)">Phase 3 · Weeks 5–8+</button>
+<!-- ══════════════════════ LEVEL 2 ══════════════════════ -->
+<div class="week-panel" id="panel-2">
+  <div class="container">
+    <div class="section-label">Level 2 — Build Strength</div>
+    <div class="section-sub">Add load to the stabilizers, begin compound pulling patterns, and progress rotator cuff work into more functional positions. Introduce 1–2 of these at a time once Level 1 feels controlled and pain-free.</div>
+
+    <!-- 1: Face Pulls -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">01</span>
+        <div class="card-title-block">
+          <h2>Face Pulls</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 20</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · rope or dual handles</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Attach a rope to the functional trainer at roughly face height. Grasp both ends and step back until there's tension, arms extended in front of you.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Pull toward your face, leading with your elbows flaring out wide and up until your hands are near your ears. Hold briefly, then return slowly over 3 seconds.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Elbows should finish at or above shoulder height at the end of the pull — that's what maximizes external rotation and posterior deltoid engagement.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          One of the best all-around exercises for your situation — it trains the posterior deltoid and external rotators together while working around the axillary nerve limitation.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=face+pulls+proper+form+shoulder" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 2: Cable External Rotation at 90 -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">02</span>
+        <div class="card-title-block">
+          <h2>Shoulder External Rotation at 90°</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 15</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Set the pulley to elbow height. Stand sideways to the functional trainer, involved arm facing away from the machine, elbow raised to shoulder height and bent 90°.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Keeping the elbow fixed at shoulder height, rotate your forearm backward (externally) as far as comfortable. Return slowly.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>The elbow shouldn't travel during the movement — only the forearm rotates.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          This progresses the Level 1 external rotation into a more functional, elevated arm position — closer to where the shoulder actually works day to day.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=cable+external+rotation+90+degrees+shoulder" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 3: Landmine Press -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">03</span>
+        <div class="card-title-block">
+          <h2>Landmine Press</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 12</span>
+          </div>
+          <div class="card-note">Barbell · landmine attachment</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Anchor one end of a barbell in a landmine attachment or corner. Grip the other end with your involved hand and get into a half-kneeling position, knee on the same side as your pressing arm down.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Starting with the bar at shoulder height and elbow tucked, press at a 45° upward angle until your arm is almost fully extended, following the bar's natural arc. Lower slowly and under control.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Don't let the bar drop on the way down — control the full range in both directions.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          Start with just the bar sleeve, no plates. The angle alone provides real resistance. Add a small plate only once the bar alone feels easy for all 3 sets.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=landmine+press+single+arm+shoulder+rehab" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 4: Cable Front Raise -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">04</span>
+        <div class="card-title-block">
+          <h2>Cable Front Raise</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 15</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · low pulley</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Attach a single handle to a low pulley on the functional trainer. Stand facing away from the machine, gripping the handle with your involved arm, palm facing down or inward.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>With a slight elbow bend, raise your arm forward to shoulder height. Hold briefly, then lower slowly over 3 seconds against the cable tension.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Don't raise above shoulder height initially, and avoid leaning back to generate momentum.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          Front raises load the deltoid directly. Stop the set if form starts to break down before finishing all reps — don't push through fatigue here.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=cable+front+raise+shoulder" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 5: Seated Row -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">05</span>
+        <div class="card-title-block">
+          <h2>Seated Row</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10–15</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · seated</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Adjust the functional trainer's pulleys to a low, seated-row position. Sit upright with your back straight and knees slightly bent, gripping a handle in each hand with neutral wrists.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Pull the handles in toward your lower ribs, keeping your elbows close to your sides and squeezing your shoulder blades together in your mid-back.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your core engaged and your back in the same position throughout — don't lean back to help the pull. Choose a handle attachment that keeps your wrists comfortable.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=seated+row+cable+machine+functional+trainer" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 6: Lat Pull Down -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">06</span>
+        <div class="card-title-block">
+          <h2>Lat Pull Down</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10–12</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · seated, high pulley</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Set both pulleys of the functional trainer to their highest position and attach a bar. Sit facing the machine, grab the bar overhead with elbows straight, and secure your thighs under a pad or stable surface if available.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Pull your arms down against the resistance to shoulder height, bringing the bar in front of your body. Return slowly to the start.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your back straight and core engaged, pulling your shoulders down toward your hips rather than shrugging up. You should feel your back and outer rib cage working.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=lat+pulldown+functional+trainer" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 7: Triceps Extension -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">07</span>
+        <div class="card-title-block">
+          <h2>Triceps Extension</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10–12</span>
+            <span class="new-badge">New</span>
+          </div>
+          <div class="card-note">Dual-arm functional trainer · standing, high pulley</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Set the functional trainer's pulley to a high position and attach a bar or rope. Stand facing the machine, grip the attachment, and bend your elbows to 90° with elbows tucked at your sides.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Press the attachment straight down toward the ground, then slowly return to the start position.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Keep your back straight and chin gently tucked. Don't let your elbows drift forward away from your body.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=triceps+extension+functional+trainer" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
   </div>
+</div>
 
-  <!-- PHASE 1 -->
-  <div class="phase phase-1 active" id="phase-1">
-    <div class="phase-header">
-      <h2>Phase 1 — Restore Mechanics</h2>
-      <p>Goal: re-establish humeral head centering, reduce stiffness and impingement, wake up the rotator cuff. 3 days per week with rest days between. Keep weights very light — this phase is about movement quality, not load.</p>
-    </div>
+<!-- ══════════════════════ LEVEL 3 ══════════════════════ -->
+<div class="week-panel" id="panel-3">
+  <div class="container">
+    <div class="section-label">Level 3 — Functional Strength</div>
+    <div class="section-sub">Build real-world shoulder strength and overhead capacity. Progress weight gradually and keep the ground rules — especially the pain and rest guidelines — front of mind at this stage.</div>
 
-    <div class="day-group">
-      <div class="day-label">Day A — Stabilizers + External Rotation (Mon / Wed / Fri)</div>
-
-      <!-- Exercise 1 -->
-      <div class="exercise-card priority-1" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">🔄</div>
-          <div class="card-title-group">
-            <div class="card-title">Side-lying External Rotation</div>
-            <div class="card-meta"><span class="sets-badge">3 × 15</span>Light dumbbell · 90 sec rest</div>
+    <!-- 1: Half-Kneeling Single Arm Press -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">01</span>
+        <div class="card-title-block">
+          <h2>Half-Kneeling Single Arm Press</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 10</span>
           </div>
-          <div class="card-expand">▾</div>
+          <div class="card-note">Dumbbell or cable</div>
         </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Lie on your non-injured side. Bend your elbow to 90°, upper arm resting against your ribcage.</li>
-            <li>Hold a very light dumbbell (1–3 lb to start). Keep your elbow pinned to your side.</li>
-            <li>Slowly rotate your forearm upward toward the ceiling. Stop before any strain.</li>
-            <li>Lower slowly — the lowering phase is equally important. Take 2–3 seconds down.</li>
-            <li>Do NOT let your elbow lift away from your body.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Isolates infraspinatus and teres minor — the two muscles that pull the humeral head back into the socket during elevation.</li>
-            <li>This is the single most important exercise for reducing your impingement and catching sensations.</li>
-          </ul>
-          <div class="nerve-note">⚡ Nerve note: This exercise doesn't load the deltoid directly, so axillary nerve fatigue isn't a limiting factor here. You can push the full 3 sets confidently.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=sidelying+external+rotation+rotator+cuff+rehab" target="_blank">▶ Search video guide</a>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-      </div>
-
-      <!-- Exercise 2 -->
-      <div class="exercise-card priority-1" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">🦅</div>
-          <div class="card-title-group">
-            <div class="card-title">Prone Y-T-W Raises</div>
-            <div class="card-meta"><span class="sets-badge">2 × 12 each</span>Bodyweight or 1–2 lb · 90 sec rest</div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Kneel on the knee of your involved side, holding a dumbbell in your involved hand at shoulder height.</p>
           </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Lie face-down on a firm surface or bench with arms hanging off the edge.</li>
-            <li><strong>Y:</strong> Raise arms diagonally overhead (like a Y shape) with thumbs up. Hold 2 sec at top.</li>
-            <li><strong>T:</strong> Raise arms straight out to the sides (like a T) with thumbs up. Hold 2 sec.</li>
-            <li><strong>W:</strong> Bend elbows to 90°, squeeze shoulder blades together and down, raising forearms. Hold 2 sec.</li>
-            <li>Lower each slowly. These are small movements — don't rush them.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Trains lower trapezius and posterior rotator cuff together — essential for scapular control.</li>
-            <li>Corrects the upward humeral head migration that causes your painful arc.</li>
-          </ul>
-          <div class="note">💡 Start with zero weight. These are harder than they look. If 12 reps feels easy after 2 weeks, add 1 lb plates.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=prone+YTW+raises+shoulder+rehab" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-
-      <!-- Exercise 3 -->
-      <div class="exercise-card priority-1" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">👊</div>
-          <div class="card-title-group">
-            <div class="card-title">Serratus Anterior Punches</div>
-            <div class="card-meta"><span class="sets-badge">3 × 15</span>Bodyweight or light band · 60 sec rest</div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Brace your core and press the dumbbell straight overhead, then lower slowly. The half-kneeling position prevents assisting with your lower back.</p>
           </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Lie on your back with arms extended toward the ceiling (shoulder-width apart, fists facing each other).</li>
-            <li>Keeping your arms straight, push your fists further toward the ceiling by protracting (rounding forward) your shoulder blades.</li>
-            <li>You should feel your shoulder blade lift off the floor/surface slightly.</li>
-            <li>Slowly lower back down until shoulder blades touch the surface again.</li>
-            <li>This is a small movement — about 2–3 inches of travel.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Serratus anterior keeps the scapula flat against the ribcage during arm elevation — without it, the scapula "wings" and impingement worsens.</li>
-            <li>Often the most neglected muscle in shoulder rehab programs.</li>
-          </ul>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=serratus+anterior+punch+shoulder+rehab" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-
-      <!-- Exercise 4 -->
-      <div class="exercise-card priority-2" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">📐</div>
-          <div class="card-title-group">
-            <div class="card-title">Scaption (Diagonal Raises)</div>
-            <div class="card-meta"><span class="sets-badge">3 × 12</span>1–3 lb dumbbell · 90 sec rest</div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Only press as high as you can without pain — work to eye level first, then progress toward full overhead as tolerated.</p>
           </div>
-          <div class="card-expand">▾</div>
         </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Stand with feet shoulder-width apart. Hold a very light dumbbell in your injured arm.</li>
-            <li>Turn your arm so thumb points slightly up (not fully up, not fully down).</li>
-            <li>Raise your arm at a 30° angle forward from straight out to the side — halfway between a front raise and a lateral raise.</li>
-            <li>Raise only as high as comfortable — start with 90° (shoulder height) and don't force range.</li>
-            <li>Lower slowly over 3 seconds.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>This diagonal plane is where the supraspinatus is mechanically strongest — less impingement risk than pure lateral raises.</li>
-            <li>Trains deltoid and supraspinatus together in a joint-friendly arc.</li>
-          </ul>
-          <div class="nerve-note">⚡ Nerve note: Your deltoid may fatigue after 6–8 reps. If quality drops, stop the set early. Do not grind through deltoid fatigue — it compromises joint mechanics.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=scaption+exercise+shoulder+rehab" target="_blank">▶ Search video guide</a>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          It's completely normal not to be ready for full overhead pressing yet given where the axillary nerve recovery stands. Progress from eye level, to forehead level, to overhead — there's no need to rush this.
         </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=half+kneeling+single+arm+press+shoulder" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
       </div>
-    </div>
+    </details>
+
+    <!-- 2: Dumbbell Incline Press -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">02</span>
+        <div class="card-title-block">
+          <h2>Dumbbell Incline Press</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3–4 × 12</span>
+          </div>
+          <div class="card-note">Dumbbells · incline bench</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Set a bench to a 30–45° incline. Lie back holding a dumbbell in each hand at shoulder level.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Press both dumbbells up and slightly inward so they come together near the top. Lower slowly, elbows at roughly 60° from your body.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Stop the descent when your upper arms are parallel to the floor — don't force a deeper stretch than that.</p>
+          </div>
+        </div>
+        <div class="tip-block">
+          <strong>Tip</strong>
+          Track the weight difference between your two sides over time. As nerve recovery continues, that gap should gradually narrow — it's one of the best objective markers of progress you have.
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=dumbbell+incline+press+form" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
+    <!-- 3: Band Pull-Aparts -->
+    <details class="exercise-card">
+      <summary class="card-header">
+        <span class="exercise-num">03</span>
+        <div class="card-title-block">
+          <h2>Band Pull-Aparts</h2>
+          <div class="rx-pill-row">
+            <span class="rx-pill">3 × 20</span>
+          </div>
+          <div class="card-note">Light resistance band</div>
+        </div>
+        <div class="chevron">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </summary>
+      <div class="card-body">
+        <div class="instruction-grid">
+          <div class="instruction-block">
+            <h3>Setup</h3>
+            <p>Hold a resistance band in front of you with both hands, shoulder-width apart, arms extended at chest height.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Movement</h3>
+            <p>Keeping arms straight, pull the band apart until it touches your chest, squeezing your shoulder blades together. Return slowly, maintaining tension throughout.</p>
+          </div>
+          <div class="instruction-block">
+            <h3>Form Check</h3>
+            <p>Don't let the band snap back on the return — control it the whole way.</p>
+          </div>
+        </div>
+        <a class="video-link" href="https://www.youtube.com/results?search_query=band+pull+apart+shoulder+rehab" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/></svg>
+          Watch video demo
+        </a>
+      </div>
+    </details>
+
   </div>
+</div>
 
-  <!-- PHASE 2 -->
-  <div class="phase phase-2" id="phase-2">
-    <div class="phase-header">
-      <h2>Phase 2 — Build Strength</h2>
-      <p>Goal: add load progressively to stabilizers, begin compound pressing patterns, increase range of motion through full arcs. 3–4 days per week. Add Phase 1 exercises as warmup before each session.</p>
-    </div>
-
-    <div class="day-group">
-      <div class="day-label">Day A — Upper Pull + Rotator Cuff</div>
-
-      <div class="exercise-card priority-3" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">🎯</div>
-          <div class="card-title-group">
-            <div class="card-title">Face Pulls</div>
-            <div class="card-meta"><span class="sets-badge">3 × 20</span>Cable or band · 60 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Attach a rope to a cable machine or wrap a band around a post at face height.</li>
-            <li>Grasp both ends, step back so there's tension. Start with arms extended.</li>
-            <li>Pull toward your face, leading with your elbows flaring out wide and up.</li>
-            <li>At peak contraction: elbows should be at or above shoulder height, hands near ears, external rotation at maximum.</li>
-            <li>Hold 1 second at the end, return slowly over 3 seconds.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Trains posterior deltoid, rear deltoid, and external rotators simultaneously.</li>
-            <li>One of the best compound exercises for your specific situation — works around the axillary nerve limitation while still loading the shoulder meaningfully.</li>
-          </ul>
-          <div class="nerve-note">⚡ Nerve note: The rear deltoid (trained here) has partial innervation from branches separate from the main axillary nerve trunk — it may respond better than the lateral deltoid. This is a key exercise for you.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=face+pulls+proper+form+shoulder" target="_blank">▶ Search video guide</a>
-        </div>
+<!-- PROGRESS TRACKING -->
+<div class="container">
+  <div class="info-panel">
+    <h2>Progress Tracking Milestones</h2>
+    <div class="milestone-grid">
+      <div class="milestone-col good">
+        <h3>Signs You're Progressing Well</h3>
+        <ul>
+          <li>Less catching/clicking during raises</li>
+          <li>Increased pain-free range of motion</li>
+          <li>Stronger lateral raise on the involved side</li>
+          <li>Narrowing strength gap between sides on pressing movements</li>
+          <li>Deltoid no longer fatigues after just a few reps</li>
+        </ul>
       </div>
-
-      <div class="exercise-card priority-3" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">💪</div>
-          <div class="card-title-group">
-            <div class="card-title">Cable External Rotation at 90°</div>
-            <div class="card-meta"><span class="sets-badge">3 × 15</span>Light cable · 90 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Set cable to elbow height. Stand sideways to the machine, injured arm facing away.</li>
-            <li>Raise your elbow to shoulder height, bent at 90°. This is your start position.</li>
-            <li>Keeping the elbow fixed at 90° and shoulder height, rotate your forearm backward (externally) as far as comfortable.</li>
-            <li>Return slowly. The elbow does not move — only the forearm rotates.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Loads the infraspinatus and teres minor in the position where they work hardest — with the arm elevated.</li>
-            <li>Progresses the side-lying external rotation from Phase 1 into a more functional range.</li>
-          </ul>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=cable+external+rotation+90+degrees+shoulder" target="_blank">▶ Search video guide</a>
-        </div>
+      <div class="milestone-col watch">
+        <h3>Signs to Scale Back</h3>
+        <ul>
+          <li>Pain worsening after sessions</li>
+          <li>New clicking patterns</li>
+          <li>Increased aching at rest</li>
+          <li>Any pins and needles or increased numbness — contact your nerve doctor if neurological symptoms change</li>
+        </ul>
       </div>
-    </div>
-
-    <div class="day-group">
-      <div class="day-label">Day B — Pressing + Deltoid</div>
-
-      <div class="exercise-card priority-4" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">📍</div>
-          <div class="card-title-group">
-            <div class="card-title">Landmine Press</div>
-            <div class="card-meta"><span class="sets-badge">3 × 12</span>Light plate load · 90 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Anchor one end of a barbell in a corner or landmine attachment. Grip the other end with one hand.</li>
-            <li>Stand in a half-kneeling position (knee on the same side as your pressing arm is down).</li>
-            <li>Start with the bar at shoulder height, elbow tucked, pressing at a 45° upward angle.</li>
-            <li>Press until arm is almost fully extended. The bar travels in a slight arc — follow it naturally.</li>
-            <li>Lower slowly and controlled. Don't let it drop.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>The angled trajectory significantly reduces impingement risk versus overhead or flat pressing.</li>
-            <li>Single-arm pressing forces scapular stabilization — you can't cheat with the other side.</li>
-          </ul>
-          <div class="note">💡 Start with just the bar sleeve (no plates). The angle gives natural resistance. Add a 2.5 lb plate only when the bar alone is easy for all 3 sets.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=landmine+press+single+arm+shoulder+rehab" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-
-      <div class="exercise-card priority-2" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">↗️</div>
-          <div class="card-title-group">
-            <div class="card-title">Cable Front Raise</div>
-            <div class="card-meta"><span class="sets-badge">3 × 15</span>Light cable, low pulley · 90 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Attach a single handle to a low cable pulley. Stand facing away from the machine.</li>
-            <li>Grip the handle with your injured arm, palm facing down or inward.</li>
-            <li>With a slight elbow bend, raise your arm forward to shoulder height (90°). Don't go higher initially.</li>
-            <li>Hold briefly at the top, lower slowly over 3 seconds against the cable tension.</li>
-            <li>The cable maintains constant tension throughout — unlike dumbbells which get harder at the top.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Constant cable tension is gentler on an unstable joint than dumbbell momentum.</li>
-            <li>Trains anterior deltoid and upper pec through a controlled, supported arc.</li>
-          </ul>
-          <div class="nerve-note">⚡ Nerve note: Monitor carefully — front raises are a primary deltoid movement. Stop the set if form degrades before completing all reps.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=cable+front+raise+shoulder" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PHASE 3 -->
-  <div class="phase phase-3" id="phase-3">
-    <div class="phase-header">
-      <h2>Phase 3 — Functional Strength</h2>
-      <p>Goal: build real-world shoulder strength and overhead capacity. Progress weight gradually, maintain pain rules strictly. 4 days per week with one full rest day between each pair. Continue Phase 1 exercises as warmup.</p>
-    </div>
-
-    <div class="day-group">
-      <div class="day-label">Progressive Overhead Work (introduce carefully)</div>
-
-      <div class="exercise-card priority-4" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">🏋️</div>
-          <div class="card-title-group">
-            <div class="card-title">Dumbbell Incline Press</div>
-            <div class="card-meta"><span class="sets-badge">3–4 × 12</span>Moderate weight · 90 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Set bench to 30–45° incline. Lie back with a dumbbell in each hand at shoulder level.</li>
-            <li>Press both dumbbells up and slightly inward — they should come together at the top, not straight up.</li>
-            <li>Lower slowly, elbows at roughly 60° from your body (not flared 90° out).</li>
-            <li>Stop the descent when upper arms are parallel to the floor — don't force a deeper stretch.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>The incline angle is more shoulder-friendly than flat pressing for rotator cuff involvement.</li>
-            <li>Bilateral pressing lets you monitor side-to-side strength discrepancy — a key marker of nerve recovery.</li>
-          </ul>
-          <div class="note">💡 Track the weight difference between sides. As the axillary nerve recovers, the gap should gradually narrow over months. This is one of your best progress markers.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=dumbbell+incline+press+form" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-
-      <div class="exercise-card priority-4" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">🔝</div>
-          <div class="card-title-group">
-            <div class="card-title">Half-Kneeling Single Arm Press</div>
-            <div class="card-meta"><span class="sets-badge">3 × 10</span>Dumbbell or cable · 90 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Kneel on the knee of your injured side. Hold a dumbbell in the injured arm at shoulder height.</li>
-            <li>Brace your core. Press the dumbbell straight overhead — don't let your torso lean away.</li>
-            <li>Lower slowly. The half-kneeling position prevents you from "helping" with your lower back.</li>
-            <li>Only go as high as you can without pain. If full overhead isn't there yet, press to eye level and build from there.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>Forces true overhead shoulder strength without compensation patterns.</li>
-            <li>The kneeling position eliminates leg drive — all load goes through the shoulder.</li>
-            <li>Best exercise to gauge readiness for full overhead activity.</li>
-          </ul>
-          <div class="nerve-note">⚡ Nerve note: You may not be ready for full overhead pressing for several more months. That's completely normal at this stage of axillary nerve recovery. Work to eye level, then forehead level, then overhead progressively — don't rush this.</div>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=half+kneeling+single+arm+press+shoulder" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-
-      <div class="exercise-card priority-3" onclick="toggleCard(this)">
-        <div class="card-header">
-          <div class="card-icon">🪢</div>
-          <div class="card-title-group">
-            <div class="card-title">Band Pull-Aparts</div>
-            <div class="card-meta"><span class="sets-badge">3 × 20</span>Light resistance band · 60 sec rest</div>
-          </div>
-          <div class="card-expand">▾</div>
-        </div>
-        <div class="card-body">
-          <h4>How to perform</h4>
-          <ol>
-            <li>Hold a resistance band in front of you with both hands, shoulder-width apart, arms extended at chest height.</li>
-            <li>Keeping arms straight, pull the band apart by moving both hands outward until the band touches your chest.</li>
-            <li>Squeeze your shoulder blades together at maximum stretch. Hold 1 second.</li>
-            <li>Return slowly. Maintain tension in the band throughout — don't let it snap back.</li>
-          </ol>
-          <h4>Why it matters</h4>
-          <ul>
-            <li>High-rep band work builds the posterior shoulder endurance needed for daily function.</li>
-            <li>Works rear deltoid, rhomboids, and middle trap — all underactive in shoulder injuries.</li>
-          </ul>
-          <a class="video-link" href="https://www.youtube.com/results?search_query=band+pull+apart+shoulder+rehab" target="_blank">▶ Search video guide</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="day-group">
-      <div class="day-label">Progress Tracking Milestones</div>
-      <div class="rest-day">
-        <strong>Signs you're progressing well:</strong> Less catching/clicking during raises · Increased pain-free range of motion · Stronger lateral raise on injured side · Narrowing gap between sides on incline press · Deltoid no longer fatigues after just a few reps
-      </div>
-      <div class="rest-day">
-        <strong>Signs to scale back:</strong> Pain worsening after sessions · New clicking patterns · Increased aching at rest · Any pins and needles or increased numbness → contact your nerve doctor if neurological symptoms change
-      </div>
-    </div>
-  </div>
-
-</div><!-- end week nav container -->
-
-<div style="max-width:760px;margin:0 auto;">
-  <!-- Weekly Structure -->
-  <div style="padding:0 20px;margin-top:28px;">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;">
-      <h3 style="font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:14px;">Suggested Weekly Structure</h3>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;">
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">MON</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">TUE</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">WED</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">THU</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">FRI</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">SAT</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink-muted);padding:6px 2px;">SUN</div>
-        <div style="background:#e8f0e8;border-radius:6px;padding:8px 4px;font-size:11px;font-weight:600;color:#2a6a2a;">Day A</div>
-        <div style="background:var(--bg);border-radius:6px;padding:8px 4px;font-size:11px;color:var(--ink-muted);">Rest</div>
-        <div style="background:#e8f0e8;border-radius:6px;padding:8px 4px;font-size:11px;font-weight:600;color:#2a6a2a;">Day A</div>
-        <div style="background:var(--bg);border-radius:6px;padding:8px 4px;font-size:11px;color:var(--ink-muted);">Rest</div>
-        <div style="background:#e8f0e8;border-radius:6px;padding:8px 4px;font-size:11px;font-weight:600;color:#2a6a2a;">Day A</div>
-        <div style="background:var(--bg);border-radius:6px;padding:8px 4px;font-size:11px;color:var(--ink-muted);">Rest</div>
-        <div style="background:var(--bg);border-radius:6px;padding:8px 4px;font-size:11px;color:var(--ink-muted);">Rest</div>
-      </div>
-      <p style="font-size:12px;color:var(--ink-muted);margin-top:10px;">Phase 1 is 3×/week. Phase 2–3 progress to 4×/week with Day A and Day B alternating. Always have at least one rest day between sessions.</p>
     </div>
   </div>
 </div>
 
-<footer>
-  <strong>Important:</strong> This program is for general informational purposes and is based on your self-reported history. It does not replace medical advice. Contact your orthopedic surgeon or nerve specialist if you experience new neurological symptoms, sharp pain, or significant regression.
-</footer>
+<!-- DISCLAIMER -->
+<div class="disclaimer-panel">
+  <div class="info-panel">
+    <p><strong>Important:</strong> This program is for general informational purposes and is based on your self-reported history, combined with exercises prescribed by Professional Physical Therapy. It does not replace medical advice. Contact your orthopedic surgeon or nerve specialist if you experience new neurological symptoms, sharp pain, or significant regression.</p>
+  </div>
+</div>
+
+<div class="page-footer">
+  <span>Self-directed program · incorporates exercises from Professional Physical Therapy (Lauren Kelley, PT)</span>
+  <span>Level 1–3 · Updated August 2026</span>
+</div>
 
 <script>
-function toggleCard(card) {
-  card.classList.toggle('open');
-}
-function showPhase(num, btn) {
-  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('phase-' + num).classList.add('active');
-  btn.classList.add('active');
-}
+  function showWeek(n) {
+    const tab = document.getElementById('tab-' + n);
+    if (tab.classList.contains('future')) return;
+    document.querySelectorAll('.week-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.week-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panel = document.getElementById('panel-' + n);
+    if (panel) panel.classList.add('active');
+  }
 </script>
+
 </body>
 </html>
